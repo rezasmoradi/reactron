@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { spawn } = require('child_process');
 
 const defaultInclude = path.resolve(__dirname, 'src');
 
@@ -42,24 +41,16 @@ module.exports = {
             title: "Reactron",
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
+            'process.env.NODE_ENV': JSON.stringify('production')
         })
     ],
-    devtool: 'cheap-source-map',
-    devServer: {
-        hot: true,
-        publicPath: '/',
-        contentBase: path.resolve(__dirname, 'dist'),
-        stats: {
-            colors: true,
-            chunks: false,
-            children: false,
-        },
-        before() {
-            spawn('electron', ['.'], {
-                shell: true, env: process.env, stdio: 'inherit'
-            }).on('close', () => process.exit(0))
-                .on('error', (err => console.log(err)))
-        },
+    stats: {
+        colors: true,
+        children: false,
+        chunks: false,
+        modules: false
+    },
+    optimization: {
+        minimize: true
     }
 };
