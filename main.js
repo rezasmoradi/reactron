@@ -5,9 +5,11 @@ let mainWin;
 let indexPath;
 let isDev = false;
 
+// Determine Development or production environment
 if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV === 'development') isDev = true;
 
 function createWindow() {
+    // create main window with specific width and height
     mainWin = new BrowserWindow({
         width: 1024,
         height: 768,
@@ -19,6 +21,7 @@ function createWindow() {
         }
     });
 
+    // set path based on production or development env to use react
     indexPath = isDev && process.argv.indexOf('--noDevServer') === -1
         ? "http://localhost:8080/index.html"
         : `file://${path.join(__dirname, 'dist', 'index.html')}`;
