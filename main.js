@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 let mainWin;
@@ -13,12 +13,15 @@ function createWindow() {
         height: 768,
         show: false,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
+            nodeIntegration: true, // use node
+            contextIsolation: false, // use require or import
+            enableRemoteModule: true // test
         }
     });
 
-    indexPath = isDev ? "http://localhost:8080/index.html" : `file://${path.join(__dirname, 'dist', 'index.html')}`;
+    indexPath = isDev && process.argv.indexOf('--noDevServer') === -1
+        ? "http://localhost:8080/index.html"
+        : `file://${path.join(__dirname, 'dist', 'index.html')}`;
 
     mainWin.loadURL(indexPath);
 
