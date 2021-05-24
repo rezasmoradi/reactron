@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { spawn } = require('child_process');
+const ReactRefreshWebpack = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const defaultInclude = path.resolve(__dirname, 'src');
 
@@ -15,7 +16,16 @@ module.exports = {
             },
             {
                 test: /\.jsx?$/i,
-                use: ['babel-loader'],
+                use: [
+                    {
+                        loader: require.resolve('babel-loader'),
+                        options: {
+                            plugins: [
+                                require.resolve('react-refresh/babel'),
+                            ].filter(Boolean),
+                        },
+                    },
+                ],
                 include: defaultInclude,
             },
             {
@@ -31,7 +41,7 @@ module.exports = {
             {
                 test: /\.(eot|ttf|woff|wotff2)$/i,
                 type: "asset/resource",
-                use: [{loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]'}],
+                use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
                 include: defaultInclude
             },
         ]
@@ -43,8 +53,10 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
-        })
-    ],
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new ReactRefreshWebpack(),
+    ].filter(Boolean),
     devtool: 'cheap-source-map',
     devServer: {
         hot: true,
