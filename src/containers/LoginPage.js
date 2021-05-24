@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {login} from "../actions/UserActions";
-import {push} from 'connected-react-router';
-import {makeSelectUser} from '../selectors/UserSelector';
-import {makeSelectApp} from '../selectors/AppSelector';
-import {createStructuredSelector} from "reselect";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { login } from "../actions/UserActions";
+import { push } from 'connected-react-router';
+import { makeSelectUser } from '../selectors/UserSelector';
+import { makeSelectApp } from '../selectors/AppSelector';
+import { createStructuredSelector } from "reselect";
+import "../styles/main.css";
 
-function LoginPage({onLogin, user, dispatch}) {
+function LoginPage({ onLogin, user, dispatch }) {
     const [username, setUsername] = useState('');
 
     useEffect(() => {
@@ -19,8 +20,9 @@ function LoginPage({onLogin, user, dispatch}) {
 
     return (
         <div>
-            <input id="usernameInput" autoFocus onChange={(e) => setUsername(e.target.value.trim())}/>
-            <button id="login" type="button" onClick={() => onLogin(username)}>Submit</button>
+            <input id="usernameInput" autoFocus onChange={(e) => setUsername(e.target.value.trim())}
+                onKeyPress={(e) => e.key === 'Enter' && onLogin(username)} />
+            <button className="btn" id="login" type="button" onClick={() => onLogin(username)}>Submit</button>
         </div>
     );
 }
