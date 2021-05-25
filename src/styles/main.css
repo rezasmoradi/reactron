@@ -5,9 +5,17 @@
     align-items: center;
 }
 
-.link {
+li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+li::before{
+    content: "\00BB\0020";
+}
+
+a {
     text-decoration: none;
-    color: black;
 }
 
 
@@ -15,10 +23,20 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.btn{
+input{
+    width: 180px;
+    height: 30px;
+    font-size: 11pt;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding-left: 10px;
+}
+
+button{
     margin-left: 20px;
     border-radius: 4px;
     border: none;
     width: 100px;
     height: 30px;
+    margin-top: 10px;
 }
