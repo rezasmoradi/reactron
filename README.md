@@ -1,5 +1,5 @@
 # Reactron
-Electron React boilerplate
+Use React in Electron
 
 ## Installation
 
