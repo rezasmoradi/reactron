@@ -15,9 +15,10 @@ function HomePage({ dispatch, user, logout }) {
     }, [user])
 
     return (
-        <div>
-            {user && user.username ? `Hello ${user.username.charAt(0).toUpperCase() + user.username.substr(1)}` : "HomePage"}
-            <button className="btn" onClick={() => logout()}>logout</button>
+        <div className="center">
+            <p>HomePage</p>
+            <span>{user && user.username ? `Hello ${user.username.charAt(0).toUpperCase() + user.username.substr(1)}` : ""}</span>
+            <button className="btn" onClick={() => logout()}>Logout</button>
         </div>
     );
 }

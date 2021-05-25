@@ -3,26 +3,28 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { login } from "../actions/UserActions";
-import { push } from 'connected-react-router';
 import { makeSelectUser } from '../selectors/UserSelector';
 import { makeSelectApp } from '../selectors/AppSelector';
 import { createStructuredSelector } from "reselect";
 import "../styles/main.css";
+import { useHistory } from "react-router";
 
-function LoginPage({ onLogin, user, dispatch }) {
+function LoginPage({ onLogin, user }) {
     const [username, setUsername] = useState('');
+    const history = useHistory();
 
     useEffect(() => {
         if (user && user.username) {
-            dispatch(push('/'));
+            history.push('/')
         }
     }, [user]);
 
     return (
-        <div>
-            <input id="usernameInput" autoFocus onChange={(e) => setUsername(e.target.value.trim())}
+        <div className="center">
+            <p>LoginPage</p>
+            <input placeholder="name" data-testid="usernameInput" autoFocus onChange={(e) => setUsername(e.target.value.trim())}
                 onKeyPress={(e) => e.key === 'Enter' && onLogin(username)} />
-            <button className="btn" id="login" type="button" onClick={() => onLogin(username)}>Submit</button>
+            <button className="btn" data-testid="login" type="button" onClick={() => onLogin(username)}>Submit</button>
         </div>
     );
 }

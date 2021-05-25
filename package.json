@@ -12,6 +12,11 @@
     "pack": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
   "build": {
     "appId": "com.reactron.app",
     "productName": "Reactron",
@@ -94,6 +99,7 @@
     "electron-builder": "^22.10.5",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "mini-css-extract-plugin": "^1.6.0",
     "react-refresh": "^0.10.0",
